@@ -2,5 +2,33 @@
 title: "Quarto-1"
 author: "Mohsin Raza"
 format: html
+execute: 
+  echo: false
 ---
 
+
+
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+library(palmerpenguins)
+library(ggplot2)
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point(size = 3, alpha = 0.7, na.rm = TRUE, aes(shape = sex)) +
+  geom_smooth(method = "lm", se = FALSE, na.rm = TRUE) +
+  scale_color_brewer(palette = "Dark2") +
+  labs(
+    title = "Penguin Body Mass vs. Flipper Length",
+    subtitle = "Linear model fitted per species",
+    x = "Flipper Length (mm)",
+    y = "Body Mass (g)",
+    color = "Species"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18),
+    plot.subtitle = element_text(size = 12),
+    legend.title = element_text(size = 12),
+    legend.text = element_text(size = 10)
+  ) +
+  guides(shape = "none")  # Removes shape (sex) legend
+```
